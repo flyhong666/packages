@@ -2,7 +2,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=runc
 PKG_VERSION:=1.0.0-rc10
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 PKG_LICENSE:=Apache-2.0
 PKG_LICENSE_FILES:=LICENSE
 
@@ -47,9 +47,10 @@ define Package/runc/description
 runc is a CLI tool for spawning and running containers according to the OCI specification.
 endef
 
+GO_PKG_BUILD_VARS += GO111MODULE=auto
 GO_PKG_INSTALL_ALL:=1
 MAKE_PATH:=$(GO_PKG_WORK_DIR_NAME)/build/src/$(GO_PKG)
-MAKE_VARS += $(call GoPackage/Environment)
+MAKE_VARS += $(GO_PKG_VARS)
 MAKE_FLAGS += \
 	COMMIT=$(PKG_SOURCE_VERSION)
 
